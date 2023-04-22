@@ -1,0 +1,22 @@
+<!--
+    tf2 实现小乌龟跟随案例
+-->
+<launch>
+    <!-- 启动乌龟节点与键盘控制节点 -->
+    <node pkg="turtlesim" type="turtlesim_node" name="turtle1" output="screen" />
+    <node pkg="turtlesim" type="turtle_teleop_key" name="key_control" output="screen"/>
+    <!-- 启动创建第二只乌龟的节点 -->
+    <node pkg="tf4_track_turtle" type="serve_generate_turtle" name="turtle2" output="screen" />
+   <!-- 启动两个乌龟相对于世界的坐标关系发布 -->
+   <!--
+       基本实现思路：
+           1. 只编写一个节点
+           2. 节点启动两次，每次传入不同的乌龟名称参数 
+    -->
+    <node pkg="tf4_track_turtle" type="pub_turtle" name="pub1" args="turtle1" output="screen" />
+    <node pkg="tf4_track_turtle" type="pub_turtle" name="pub2" args="turtle2" output="screen" />
+
+    <!-- 4. 订阅turtle1与turtle2相对于世界坐标系的坐标信息
+            并且转换成turtle1相对于turtle2的坐标信息 -->
+    <node pkg="tf4_track_turtle" type="control_turtle2" name="control" output="screen" />
+</launch>

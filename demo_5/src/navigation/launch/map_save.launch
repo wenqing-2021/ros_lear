@@ -1,0 +1,4 @@
+<launch>
+    <arg name="filename" value="$(find navigation)/map/house_map" /> <!--修改该行的位置即可-->
+    <node name="map_save" pkg="map_server" type="map_saver" args="-f $(arg filename)" />
+</launch>

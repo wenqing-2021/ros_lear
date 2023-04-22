@@ -1,0 +1,6 @@
+<launch>
+<!-- 载入urdf文件 -->
+    <param name="robot_description" textfile="$(find urdf_rivz)/urdf/urdf/urdf_helloworld.urdf" />
+<!-- 启动rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find urdf_rivz)/config/show_mycar.rviz" />
+</launch>

@@ -1,0 +1,13 @@
+<launch>
+<!-- 载入urdf文件 -->
+    <param name="robot_description" textfile="$(find urdf_rivz)/urdf/urdf/joint.urdf" />
+<!-- 启动rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find urdf_rivz)/config/show_mycar.rviz" />
+<!-- 显示URDF时，必须发布不同部件之间的 坐标系 关系 -->
+<!-- 利用joint_state_publisher 和 robot_state_publisher发布坐标关系，不然会出错 -->
+    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" />
+    <!-- 添加机器人状态发布节点 -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+    <!-- 可选:用于控制关节运动的节点 -->
+    <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui" />
+</launch>
